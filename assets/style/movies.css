@@ -10,7 +10,7 @@ body {
     height: 50rem;
     margin: 0 auto;
     padding: 20px;
-    background-color: #fff; /* Couleur d'arrière-plan de la section des détails du film */
+    background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
@@ -41,5 +41,5 @@ p {
 .note {
     font-size: 18px;
     font-weight: bold;
-    color: #ff5722; /* Couleur personnalisée pour la note */
+    color: #ff5722; 
 }
