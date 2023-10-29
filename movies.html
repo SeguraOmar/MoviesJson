@@ -1,14 +1,66 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/style/movies.css"> 
+    <title>Movie Details</title>
 </head>
-
 <body>
+    <div id="movieDetails" class="container shadow-lg">
+        <div class="movie-info">
+            <h2 id="title"></h2>
+            <img class="imgMovie" id="poster" alt="affiche du film">
+            <p>Date de sortie : <i id="releaseDate"></i></p>
+            <p class="note" id="voteAverage"></p>
+            <p id="overview"></p>
+        </div>
+        
+    </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const movieId = urlParams.get('id');
+
+            if (movieId) {
+                fetch('data/movies.json')
+                    .then(res => res.json())
+                    .then(data => {
+                        const movieDetails = data.results.find(movie => movie.id === parseInt(movieId, 10));
+
+                        if (movieDetails) {
+                            const movieDetailsContainer = document.querySelector('#movieDetails');
+                            const title = document.querySelector('#title');
+                            const poster = document.querySelector('#poster');
+                            const releaseDate = document.querySelector('#releaseDate');
+                            const voteAverage = document.querySelector('#voteAverage');
+                            const overview = document.querySelector('#overview');
+                            const castList = document.querySelector('#castList');
+                            const crewList = document.querySelector('#crewList');
+
+                            title.textContent = movieDetails.title;
+                            poster.src = `https://image.tmdb.org/t/p/original/${movieDetails.poster_path}`;
+                            poster.alt = movieDetails.title;
+                            releaseDate.textContent = movieDetails.release_date;
+                            voteAverage.textContent = `${movieDetails.vote_average * 10}%`;
+                            overview.textContent = movieDetails.overview;
+
+                        } else {
+                            console.error('Film non trouvé.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erreur lors de la récupération des données du film :', error);
+                    });
+            } else {
+                console.error('ID du film non spécifié dans l\'URL.');
+            }
+        });
+    </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
-
 </html>
+

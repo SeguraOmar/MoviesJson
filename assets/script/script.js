@@ -11,12 +11,18 @@ fetch('data/movies.json')
             card.classList.add('card');
 
             card.innerHTML = `
-            <img class="imgMovie" src="https://image.tmdb.org/t/p/original/${movie.poster_path}" alt="${movie.title}">
+                <img class="imgMovie" src="https://image.tmdb.org/t/p/original/${movie.poster_path}" alt="${movie.title}">
                 <h2>${movie.title}</h2>
                 <p><i>${movie.release_date}</i></p>
-                <p class= "note">${movie.vote_average*10}%</p>
+                <p class="note">${movie.vote_average * 10}%</p>
             `;
+
+            card.addEventListener('click', () => {
+                window.location.href = `movies.html?id=${movie.id}`;
+            });
 
             infosContainer.appendChild(card);
         }
     });
+
+
