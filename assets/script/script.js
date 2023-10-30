@@ -28,7 +28,7 @@ fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', op
         `
         sorties.appendChild(card);
     }
-})
+});
 
 
 
@@ -36,15 +36,15 @@ fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', op
 
 
 
-const options = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MTdjYzc0OTU1MTQ5YmUyM2RmODM4MTNmMjAxYTRlOCIsInN1YiI6IjYyODM5OGJiZWM0NTUyMTAzMmE5NTcxMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.REF4Oi-K06F7Jq8LolG5vPQtyeiGk3nBFdDyL1FLq7E'
-    }
-  };
+// const options = {
+//     method: 'GET',
+//     headers: {
+//       accept: 'application/json',
+//       Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MTdjYzc0OTU1MTQ5YmUyM2RmODM4MTNmMjAxYTRlOCIsInN1YiI6IjYyODM5OGJiZWM0NTUyMTAzMmE5NTcxMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.REF4Oi-K06F7Jq8LolG5vPQtyeiGk3nBFdDyL1FLq7E'
+//     }
+//   };
   
-  fetch('https://api.themoviedb.org/3/movie/top_rated?language=fr-FR&page=1', options)
+//   fetch('https://api.themoviedb.org/3/movie/top_rated?language=fr-FR&page=1', options)
 
 
 
