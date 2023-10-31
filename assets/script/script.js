@@ -2,49 +2,95 @@
 // console.log(results);
 
 
-
-
-const sorties = document.querySelector("#latest");
 const options = {
     method: 'GET',
     headers: {
         accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MTdjYzc0OTU1MTQ5YmUyM2RmODM4MTNmMjAxYTRlOCIsInN1YiI6IjYyODM5OGJiZWM0NTUyMTAzMmE5NTcxMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.REF4Oi-K06F7Jq8LolG5vPQtyeiGk3nBFdDyL1FLq7E'
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkOGEyZTA0MTVmODZkZGQ4MDI2NGViNDM3YzA0NDU5MyIsInN1YiI6IjY1NDBhZDdiNDU1N2EwMDBjNmI0NzYxMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.lSe8XF_F4iGTunYZS6mtnr3oyIk5brpibSgT2g2tIWc'
     }
 };
 
-fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', options)
-    .then(res => res.json())
-    .then(data => {
-
-        console.log(data.results)
-        for (const latest of data['results']) {
-            const card = document.createElement("div");
-            card.classList.add("card");
-            card.innerHTML = `
-
-        <img src="https://image.tmdb.org/t/p/original/${latest.poster_path}" alt="${latest.title}">
-
-        `
-        sorties.appendChild(card);
-    }
-});
+let now = document.querySelector("#latestBtn");
+now.addEventListener("click", function () {
+    let sorties = document.querySelector("#latest");
+    sorties.innerHTML = ""
+    let affichage = document.querySelector("#topRated");
+    affichage.innerHTML = ""
 
 
+    fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', options)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data.results)
+            for (let i = 0; i < 5 && i < data.results.length; i++) {
+                const latest = data.results[i];
+                const card = document.createElement("div");
+                card.classList.add("card");
+                card.innerHTML = `
+                <img src="https://image.tmdb.org/t/p/original/${latest.poster_path}" alt="${latest.title}">
+                `;
+                sorties.appendChild(card);
+            }
+        });
+})
 
 
 
 
 
-// const options = {
-//     method: 'GET',
-//     headers: {
-//       accept: 'application/json',
-//       Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MTdjYzc0OTU1MTQ5YmUyM2RmODM4MTNmMjAxYTRlOCIsInN1YiI6IjYyODM5OGJiZWM0NTUyMTAzMmE5NTcxMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.REF4Oi-K06F7Jq8LolG5vPQtyeiGk3nBFdDyL1FLq7E'
-//     }
-//   };
-  
-//   fetch('https://api.themoviedb.org/3/movie/top_rated?language=fr-FR&page=1', options)
+
+
+
+
+
+
+
+
+let bestMovies = document.querySelector("#topRatedBtn")
+bestMovies.addEventListener("click", function () {
+    let affichage = document.querySelector("#topRated");
+    affichage.innerHTML = ""
+    let sorties = document.querySelector("#latest");
+    sorties.innerHTML = ""
+
+    fetch('https://api.themoviedb.org/3/movie/top_rated?language=fr-FR&page=1', options)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            for (let i = 0; i < 5 && i < data.results.length; i++) {
+
+                const notes = data.results[i];
+                const card = document.createElement("div");
+                card.classList.add("card")
+                card.innerHTML = `
+                        <img src="https://image.tmdb.org/t/p/original/${notes.poster_path}" alt="${notes.title}">
+                
+                        `
+                affichage.appendChild(card);
+            }
+        })
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -55,13 +101,17 @@ fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', op
 
 let bouton = document.querySelector("#bouton");
 bouton.addEventListener("click", function () {
+    let sorties = document.querySelector("#latest");
+    sorties.innerHTML = ""
+    let affichage = document.querySelector("#topRated");
+    affichage.innerHTML = ""
     const infos = document.querySelector("#infos");
     infos.innerHTML = "";
     const options = {
         method: 'GET',
         headers: {
             accept: 'application/json',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MTdjYzc0OTU1MTQ5YmUyM2RmODM4MTNmMjAxYTRlOCIsInN1YiI6IjYyODM5OGJiZWM0NTUyMTAzMmE5NTcxMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.REF4Oi-K06F7Jq8LolG5vPQtyeiGk3nBFdDyL1FLq7E'
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkOGEyZTA0MTVmODZkZGQ4MDI2NGViNDM3YzA0NDU5MyIsInN1YiI6IjY1NDBhZDdiNDU1N2EwMDBjNmI0NzYxMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.lSe8XF_F4iGTunYZS6mtnr3oyIk5brpibSgT2g2tIWc'
         }
     };
     let movieSearch = document.querySelector("#searchBar").value
