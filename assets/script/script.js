@@ -2,6 +2,9 @@
 // console.log(results);
 
 
+
+
+
 const options = {
     method: 'GET',
     headers: {
@@ -18,26 +21,28 @@ latestBtn.addEventListener("click", function () {
     sorties.innerHTML = ""
     let affichage = document.querySelector("#topRated");
     affichage.innerHTML = ""
-
+    const infos = document.querySelector("#infos");
+    infos.innerHTML = "";
+    
 
     fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', options)
-        .then(res => res.json())
-        .then(data => {
-            console.log(data.results)
-            for (let i = 0; i < data.results.length; i++) {
-                const latest = data.results[i];
-                const card = document.createElement("div");
-                card.classList.add("card");
-                card.innerHTML = `
-                <img src="https://image.tmdb.org/t/p/original/${latest.poster_path}" alt="${latest.title}">
-                `
-                card.addEventListener('click', () => {
-                    window.location.href = `movies.html?id=${latest.id}`;
-                });
-                sorties.appendChild(card);
-
-            }
-        });
+    .then(res => res.json())
+    .then(data => {
+        console.log(data.results)
+        for (let i = 0; i < data.results.length; i++) {
+            const latest = data.results[i];
+            const card = document.createElement("div");
+            card.classList.add("card");
+            card.innerHTML = `
+            <img src="https://image.tmdb.org/t/p/original/${latest.poster_path}" alt="${latest.title}">
+            `
+            card.addEventListener('click', () => {
+                window.location.href = `movies.html?id=${latest.id}`;
+            });
+            sorties.appendChild(card);
+            
+        }
+    });
 })
 
 
@@ -57,30 +62,32 @@ topRatedBtn.addEventListener("click", function () {
     
     topRatedBtn.classList.add("active");
     latestBtn.classList.remove("active");
-    let affichage = document.querySelector("#topRated");
-    affichage.innerHTML = ""
     let sorties = document.querySelector("#latest");
     sorties.innerHTML = ""
-
+    let affichage = document.querySelector("#topRated");
+    affichage.innerHTML = ""
+    const infos = document.querySelector("#infos");
+    infos.innerHTML = "";
+    
     fetch('https://api.themoviedb.org/3/movie/top_rated?language=fr-FR&page=1', options)
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-            for (let i = 0;  i < data.results.length; i++) {
+    .then(res => res.json())
+    .then(data => {
+        console.log(data)
+        for (let i = 0;  i < data.results.length; i++) {
 
-                const notes = data.results[i];
-                const card = document.createElement("div");
-                card.classList.add("card")
-                card.innerHTML = `
-                        <img src="https://image.tmdb.org/t/p/original/${notes.poster_path}" alt="${notes.title}">
-                
-                        `
-                        card.addEventListener('click', () => {
-                            window.location.href = `movies.html?id=${notes.id}`;
-                        });
-                affichage.appendChild(card);
-            }
-        })
+            const notes = data.results[i];
+            const card = document.createElement("div");
+            card.classList.add("card")
+            card.innerHTML = `
+            <img src="https://image.tmdb.org/t/p/original/${notes.poster_path}" alt="${notes.title}">
+            
+            `
+            card.addEventListener('click', () => {
+                window.location.href = `movies.html?id=${notes.id}`;
+            });
+            affichage.appendChild(card);
+        }
+    })
 })
 
 
@@ -129,16 +136,17 @@ bouton.addEventListener("click", function () {
     let movieSearch = document.querySelector("#searchBar").value
     console.log(movieSearch);
     fetch(`https://api.themoviedb.org/3/search/movie?query=${movieSearch}&include_adult=false&language=fr-FR&page=1`, options)
-        .then(res => res.json())
-        .then(data => {
-
-            for (const movie of data['results']) {
-                const card = document.createElement('div');
-                card.classList.add('card');
-
-                card.innerHTML = `
-                <img class="imgMovie" src="https://image.tmdb.org/t/p/original/${movie.poster_path}" alt="${movie.title}">
-                <h2>${movie.title}</h2>
+    .then(res => res.json())
+    .then(data => {
+       
+        
+        for (const movie of data['results']) {
+            const card = document.createElement('div');
+            card.classList.add('card');
+            
+            card.innerHTML = `
+            <img class="imgMovie" src="https://image.tmdb.org/t/p/original/${movie.poster_path}" alt="${movie.title}">
+            <h2>${movie.title}</h2>
                 <p><i>${movie.release_date}</i></p>
                 <p class="note">${movie.vote_average * 10}%</p>
             `;
