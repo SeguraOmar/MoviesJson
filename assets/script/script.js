@@ -24,7 +24,7 @@ latestBtn.addEventListener("click", function () {
         .then(res => res.json())
         .then(data => {
             console.log(data.results)
-            for (let i = 0; i < 5 && i < data.results.length; i++) {
+            for (let i = 0; i < 10 && i < data.results.length; i++) {
                 const latest = data.results[i];
                 const card = document.createElement("div");
                 card.classList.add("card");
@@ -61,7 +61,7 @@ topRatedBtn.addEventListener("click", function () {
         .then(res => res.json())
         .then(data => {
             console.log(data)
-            for (let i = 0; i < 5 && i < data.results.length; i++) {
+            for (let i = 0; i < 10 && i < data.results.length; i++) {
 
                 const notes = data.results[i];
                 const card = document.createElement("div");
