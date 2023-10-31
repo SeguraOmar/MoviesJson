@@ -24,14 +24,18 @@ latestBtn.addEventListener("click", function () {
         .then(res => res.json())
         .then(data => {
             console.log(data.results)
-            for (let i = 0; i < 10 && i < data.results.length; i++) {
+            for (let i = 0; i < data.results.length; i++) {
                 const latest = data.results[i];
                 const card = document.createElement("div");
                 card.classList.add("card");
                 card.innerHTML = `
                 <img src="https://image.tmdb.org/t/p/original/${latest.poster_path}" alt="${latest.title}">
-                `;
+                `
+                card.addEventListener('click', () => {
+                    window.location.href = `movies.html?id=${latest.id}`;
+                });
                 sorties.appendChild(card);
+
             }
         });
 })
@@ -50,6 +54,7 @@ latestBtn.addEventListener("click", function () {
 
 let topRatedBtn = document.querySelector("#topRatedBtn")
 topRatedBtn.addEventListener("click", function () {
+    
     topRatedBtn.classList.add("active");
     latestBtn.classList.remove("active");
     let affichage = document.querySelector("#topRated");
@@ -61,7 +66,7 @@ topRatedBtn.addEventListener("click", function () {
         .then(res => res.json())
         .then(data => {
             console.log(data)
-            for (let i = 0; i < 10 && i < data.results.length; i++) {
+            for (let i = 0;  i < data.results.length; i++) {
 
                 const notes = data.results[i];
                 const card = document.createElement("div");
@@ -70,6 +75,9 @@ topRatedBtn.addEventListener("click", function () {
                         <img src="https://image.tmdb.org/t/p/original/${notes.poster_path}" alt="${notes.title}">
                 
                         `
+                        card.addEventListener('click', () => {
+                            window.location.href = `movies.html?id=${notes.id}`;
+                        });
                 affichage.appendChild(card);
             }
         })
@@ -135,13 +143,13 @@ bouton.addEventListener("click", function () {
                 <p class="note">${movie.vote_average * 10}%</p>
             `;
 
-                card.addEventListener('click', () => {
-                    window.location.href = `movies.html?id=${movie.id}`;
-                });
-
-                infos.appendChild(card);
-            }
-        });
-
-
+            card.addEventListener('click', () => {
+                window.location.href = `movies.html?id=${movie.id}`;
+            });
+            
+            infos.appendChild(card);
+        }
+    });
+    
+    
 });
