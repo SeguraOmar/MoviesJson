@@ -10,8 +10,10 @@ const options = {
     }
 };
 
-let now = document.querySelector("#latestBtn");
-now.addEventListener("click", function () {
+let latestBtn = document.querySelector("#latestBtn");
+latestBtn.addEventListener("click", function () {
+    latestBtn.classList.add("active");
+    topRatedBtn.classList.remove("active");
     let sorties = document.querySelector("#latest");
     sorties.innerHTML = ""
     let affichage = document.querySelector("#topRated");
@@ -46,8 +48,10 @@ now.addEventListener("click", function () {
 
 
 
-let bestMovies = document.querySelector("#topRatedBtn")
-bestMovies.addEventListener("click", function () {
+let topRatedBtn = document.querySelector("#topRatedBtn")
+topRatedBtn.addEventListener("click", function () {
+    topRatedBtn.classList.add("active");
+    latestBtn.classList.remove("active");
     let affichage = document.querySelector("#topRated");
     affichage.innerHTML = ""
     let sorties = document.querySelector("#latest");
